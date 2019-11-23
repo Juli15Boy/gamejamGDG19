@@ -5,7 +5,7 @@ using UnityEngine;
 public class pickUpObject : MonoBehaviour
 {
     [SerializeField]
-    int pickUpId, buff, debuff;
+    int pickUpId, pickupType, buff, debuff;
     [SerializeField]
     string pickUpName;
 
@@ -18,5 +18,10 @@ public class pickUpObject : MonoBehaviour
     public int getDebuff()
     {
         return debuff;
+    }
+
+    public int getPickupType()
+    {
+        return pickupType;
     }
 }

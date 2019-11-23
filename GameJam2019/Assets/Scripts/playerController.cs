@@ -5,7 +5,7 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     public float velocity = 7f;
-    private string pickUpObjectTag = "Pickup";
+    private string pickupTag = "Pickup";
     private int pickupBuff = 0;
     private int pickupDeBuff = 0;
     // Start is called before the first frame update
@@ -41,20 +41,20 @@ public class playerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         Debug.Log(col.gameObject.name + " : " + col.tag + " : " + Time.time);
-        Debug.Log(col.GetComponent<pickUpObject>().getBuff());
 
-        Debug.Log(pickUpObjectTag);
+        pickupBuff = col.GetComponent<pickUpObject>().getBuff();
+        pickupDeBuff = col.GetComponent<pickUpObject>().getDebuff();
 
-        if (col.tag == pickUpObjectTag)
+        if (col.tag == pickupTag)
         {
-            Debug.Log(pickupDeBuff + "buff: " + pickupBuff);
-
             if (pickupBuff != 0)
             {
+                Debug.Log("AddVelocity");
                 velocity += pickupBuff;
             }
             else if (pickupDeBuff != 0)
             {
+                Debug.Log("DesVelocity");
                 velocity -= pickupDeBuff;
             }
             Destroy(col.gameObject);
