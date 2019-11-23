@@ -33,5 +33,12 @@ public class playerController : MonoBehaviour
         {
             transform.position += Vector3.down * velocity * Time.deltaTime;
         }
+
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log(col.gameObject.name + " : " + col.tag + " : " + Time.time);
+    }
+
 }
