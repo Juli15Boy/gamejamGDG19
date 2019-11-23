@@ -1,13 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
     public float velocity = 7f;
+    public float oxygen = 10f;
     private string pickupTag = "Pickup";
     private int pickupBuff = 0;
     private int pickupDeBuff = 0;
+    private int pickupType = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,23 +46,52 @@ public class playerController : MonoBehaviour
     {
         Debug.Log(col.gameObject.name + " : " + col.tag + " : " + Time.time);
 
-        pickupBuff = col.GetComponent<pickUpObject>().getBuff();
-        pickupDeBuff = col.GetComponent<pickUpObject>().getDebuff();
-
-        if (col.tag == pickupTag)
+        if(col.tag == pickupTag)
         {
-            if (pickupBuff != 0)
-            {
-                Debug.Log("AddVelocity");
-                velocity += pickupBuff;
-            }
-            else if (pickupDeBuff != 0)
-            {
-                Debug.Log("DesVelocity");
-                velocity -= pickupDeBuff;
-            }
-            Destroy(col.gameObject);
+            pickupType = col.GetComponent<pickUpObject>().getDebuff();
+            pickupBuff = col.GetComponent<pickUpObject>().getBuff();
+            pickupDeBuff = col.GetComponent<pickUpObject>().getPickupType();
+            applyPickupEffects();
         }
     }
 
+    private void applyPickupEffects()
+    {
+        //Pickup Type: 0 -> Nothing / 1 -> Oxygen / 2 -> Speed
+        switch (pickupType)
+        {
+            //Nothing
+            case 0:
+
+                break;
+
+            //Oxygen
+            case 1:
+                if (pickupBuff != 0)
+                {
+                    Debug.Log("AddOxygen");
+                    oxygen += pickupBuff;
+                }
+                else if (pickupDeBuff != 0)
+                {
+                    Debug.Log("DesOxygen");
+                    oxygen -= pickupDeBuff;
+                }
+                break;
+
+            //Speed
+            case 2:
+                if (pickupBuff != 0)
+                {
+                    Debug.Log("AddVelocity");
+                    velocity += pickupBuff;
+                }
+                else if (pickupDeBuff != 0)
+                {
+                    Debug.Log("DesVelocity");
+                    velocity -= pickupDeBuff;
+                }
+                break;
+        }
+    }
 }
