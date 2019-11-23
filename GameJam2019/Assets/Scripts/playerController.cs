@@ -48,10 +48,14 @@ public class playerController : MonoBehaviour
 
         if(col.tag == pickupTag)
         {
-            pickupType = col.GetComponent<pickUpObject>().getDebuff();
+            pickupDeBuff= col.GetComponent<pickUpObject>().getDebuff();
             pickupBuff = col.GetComponent<pickUpObject>().getBuff();
-            pickupDeBuff = col.GetComponent<pickUpObject>().getPickupType();
+            pickupType = col.GetComponent<pickUpObject>().getPickupType();
+
             applyPickupEffects();
+
+            Destroy(col.gameObject);
+            //itemCount++;
         }
     }
 

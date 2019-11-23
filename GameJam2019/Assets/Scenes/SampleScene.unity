@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpId: 1
-  pickupType: 0
+  pickupType: 1
   buff: 100
   debuff: 0
   pickUpName: 
@@ -50428,7 +50428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickUpId: 1
-  pickupType: 0
+  pickupType: 2
   buff: 30
   debuff: 0
   pickUpName: 
@@ -50556,6 +50556,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 5
+  oxygen: 10
 --- !u!61 &1364902355
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -50862,7 +50863,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &2084343880
 AudioListener:
   m_ObjectHideFlags: 0
