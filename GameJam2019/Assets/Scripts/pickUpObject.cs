@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class pickUpObject : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    int pickUpId, buff, debuff;
+    [SerializeField]
+    string pickUpName;
+
+
+    public int getBuff()
     {
-        
+        return buff; 
     }
 
-    // Update is called once per frame
-    void Update()
+    public int getDebuff()
     {
-        
+        return debuff;
     }
 }
