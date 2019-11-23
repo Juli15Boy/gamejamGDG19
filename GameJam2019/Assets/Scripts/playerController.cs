@@ -8,10 +8,12 @@ public class playerController : MonoBehaviour
 {
     public float velocity = 7f;
     private string pickupTag = "Pickup";
+    private string spaceShipTag = "Spaceship";
     private int pickupBuff = 0;
     private int pickupDeBuff = 0;
     private int pickupType = 0;
     private bool carriesLog = false;
+    private bool carriesBattery = false;
     private int droppedLogs = 0;
 
     Vector2 movement;
@@ -32,7 +34,7 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            //SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("MainMenu");
         }
 
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -61,6 +63,12 @@ public class playerController : MonoBehaviour
 
             applyPickupEffects(col);
             //itemCount++;
+        }else if(col.tag == spaceShipTag)
+        {
+            if (carriesBattery)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
         }
     }
 
@@ -146,6 +154,22 @@ public class playerController : MonoBehaviour
                 else
                 {
                     Debug.Log("I have no log!");
+                }
+                break;
+
+            //Take battery
+            case 5:
+                if (!carriesBattery)
+                {
+                    Debug.Log("Took battery!");
+
+                    //effectsAnimator.SetTrigger("applyBuff");
+                    velocity -= pickupBuff;
+                    carriesBattery = true;
+                }
+                else
+                {
+                    Debug.Log("I have the battery!");
                 }
                 break;
         }
