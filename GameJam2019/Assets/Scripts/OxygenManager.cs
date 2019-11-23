@@ -39,4 +39,14 @@ public class OxygenManager : MonoBehaviour
         }
 
     }
+
+    public void addOxygen(int amount)
+    {
+        timeLeft += amount;
+    }
+
+    public void loseOxygen(int amount)
+    {
+        timeLeft -= amount;
+    }
 }
