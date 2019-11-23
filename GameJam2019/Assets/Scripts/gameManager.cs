@@ -6,6 +6,8 @@ public class gameManager : MonoBehaviour
 {
     [SerializeField] Transform spawnPoint;
 
+    public static bool GameIsPaused = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +17,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
     void killPlayer()

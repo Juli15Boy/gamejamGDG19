@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class playerController : MonoBehaviour
@@ -21,6 +22,10 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position += Vector3.left * velocity * Time.deltaTime;
