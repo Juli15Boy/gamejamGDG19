@@ -12,34 +12,33 @@ public class playerController : MonoBehaviour
     private int pickupDeBuff = 0;
     private int pickupType = 0;
 
+    Vector2 movement;
+
+    private Rigidbody2D rb;
+
+    public Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.position += Vector3.left * velocity * Time.deltaTime;
-        }
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
-        else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.position += Vector3.right * velocity * Time.deltaTime;
-        }
-        else if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.position += Vector3.up * velocity * Time.deltaTime;
-        }
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
 
-        else if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.position += Vector3.down * velocity * Time.deltaTime;
-        }
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+    }
 
+    void FixedUpdate()
+    {
+        rb.MovePosition(rb.position + movement * velocity * Time.fixedDeltaTime);
     }
 
     void OnTriggerEnter2D(Collider2D col)
