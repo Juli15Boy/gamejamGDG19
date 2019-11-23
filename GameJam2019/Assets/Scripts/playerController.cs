@@ -166,6 +166,7 @@ public class playerController : MonoBehaviour
                     //effectsAnimator.SetTrigger("applyBuff");
                     velocity -= pickupBuff;
                     carriesBattery = true;
+                    Destroy(col.gameObject);
                 }
                 else
                 {
