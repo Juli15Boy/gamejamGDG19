@@ -7,7 +7,6 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     public float velocity = 7f;
-    public float oxygen = 10f;
     private string pickupTag = "Pickup";
     private int pickupBuff = 0;
     private int pickupDeBuff = 0;
@@ -53,10 +52,14 @@ public class playerController : MonoBehaviour
 
         if(col.tag == pickupTag)
         {
-            pickupType = col.GetComponent<pickUpObject>().getDebuff();
+            pickupDeBuff= col.GetComponent<pickUpObject>().getDebuff();
             pickupBuff = col.GetComponent<pickUpObject>().getBuff();
-            pickupDeBuff = col.GetComponent<pickUpObject>().getPickupType();
+            pickupType = col.GetComponent<pickUpObject>().getPickupType();
+
             applyPickupEffects();
+
+            Destroy(col.gameObject);
+            //itemCount++;
         }
     }
 
@@ -75,12 +78,13 @@ public class playerController : MonoBehaviour
                 if (pickupBuff != 0)
                 {
                     Debug.Log("AddOxygen");
-                    oxygen += pickupBuff;
+                    gameObject.GetComponent<OxygenManager>().addOxygen(pickupBuff);
                 }
                 else if (pickupDeBuff != 0)
                 {
                     Debug.Log("DesOxygen");
-                    oxygen -= pickupDeBuff;
+                    gameObject.GetComponent<OxygenManager>().loseOxygen(pickupDeBuff);
+
                 }
                 break;
 
