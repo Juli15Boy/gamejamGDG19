@@ -20,7 +20,8 @@ public class gameManager : MonoBehaviour
 
     void killPlayer()
     {
-        transform.position = spawnPoint.position;
+        //TODO: Change it to reload scene
+        //transform.position = spawnPoint.position;
         return;
     }
 }
