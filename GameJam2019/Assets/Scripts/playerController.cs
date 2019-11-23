@@ -20,16 +20,16 @@ public class playerController : MonoBehaviour
             transform.position += Vector3.left * velocity * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += Vector3.right * velocity * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.UpArrow))
         {
             transform.position += Vector3.up * velocity * Time.deltaTime;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.DownArrow))
         {
             transform.position += Vector3.down * velocity * Time.deltaTime;
         }
