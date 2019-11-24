@@ -53,17 +53,18 @@ public class playerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-       // Debug.Log(col.gameObject.name + " : " + col.tag + " : " + Time.time);
+        // Debug.Log(col.gameObject.name + " : " + col.tag + " : " + Time.time);
 
-        if(col.tag == pickupTag)
+        if (col.tag == pickupTag)
         {
-            pickupDeBuff= col.GetComponent<pickUpObject>().getDebuff();
+            pickupDeBuff = col.GetComponent<pickUpObject>().getDebuff();
             pickupBuff = col.GetComponent<pickUpObject>().getBuff();
             pickupType = col.GetComponent<pickUpObject>().getPickupType();
 
             applyPickupEffects(col);
             //itemCount++;
-        }else if(col.tag == spaceShipTag)
+        }
+        else if (col.tag == spaceShipTag)
         {
             if (carriesBattery)
             {
@@ -89,13 +90,14 @@ public class playerController : MonoBehaviour
                 {
                     //Debug.Log("AddOxygen");
                     gameObject.GetComponent<OxygenManager>().addOxygen(pickupBuff);
-                    effectsAnimator.SetTrigger("applyBuff");
+                    triggerBuffAnimations(true);
+
                 }
                 else if (pickupDeBuff != 0)
                 {
                     //Debug.Log("DesOxygen");
                     gameObject.GetComponent<OxygenManager>().loseOxygen(pickupDeBuff);
-                    effectsAnimator.SetTrigger("applyDebuff");
+                    triggerBuffAnimations(false);
 
 
                 }
@@ -106,14 +108,12 @@ public class playerController : MonoBehaviour
             case 2:
                 if (pickupBuff != 0)
                 {
-                    //Debug.Log("AddVelocity");
-                    effectsAnimator.SetTrigger("applyBuff");
+                    triggerBuffAnimations(true);
                     velocity += pickupBuff;
                 }
                 else if (pickupDeBuff != 0)
                 {
-                    //Debug.Log("DesVelocity");
-                    effectsAnimator.SetTrigger("applyDebuff");
+                    triggerBuffAnimations(false);
                     velocity -= pickupDeBuff;
                 }
                 Destroy(col.gameObject);
@@ -124,7 +124,7 @@ public class playerController : MonoBehaviour
                 if (!carriesLog)
                 {
                     Debug.Log("DesVelocity by Log");
-                    effectsAnimator.SetTrigger("applyDebuff");
+                    triggerBuffAnimations(false);
                     velocity -= pickupDeBuff;
                     Destroy(col.gameObject);
                     carriesLog = true;
@@ -143,10 +143,10 @@ public class playerController : MonoBehaviour
                     Debug.Log("Dropped Logs " + droppedLogs);
 
                     col.GetComponent<bridgeManager>().updateBridge(droppedLogs);
-                    effectsAnimator.SetTrigger("applyBuff");
+                    triggerBuffAnimations(true);
                     velocity += pickupBuff;
                     carriesLog = false;
-                    if(droppedLogs == 3)
+                    if (droppedLogs == 3)
                     {
                         Destroy(col.gameObject);
                     }
@@ -163,8 +163,8 @@ public class playerController : MonoBehaviour
                 {
                     Debug.Log("Took battery!");
 
-                    //effectsAnimator.SetTrigger("applyBuff");
                     velocity -= pickupBuff;
+                    triggerBuffAnimations(false);
                     carriesBattery = true;
                     Destroy(col.gameObject);
                 }
@@ -176,15 +176,15 @@ public class playerController : MonoBehaviour
         }
     }
 
-    private void showAppliedEffect(bool isPositiveEffect)
+    private void triggerBuffAnimations(bool isPositiveEffect)
     {
         if (isPositiveEffect)
         {
-
+            effectsAnimator.SetTrigger("applyBuff");
         }
         else
         {
-
+            effectsAnimator.SetTrigger("applyDebuff");
         }
     }
 }
