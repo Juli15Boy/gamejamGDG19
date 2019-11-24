@@ -15,6 +15,7 @@ public class playerController : MonoBehaviour
     private bool carriesLog = false;
     private bool carriesBattery = false;
     private int droppedLogs = 0;
+    public GameObject doorCollider;
 
     Vector2 movement;
 
@@ -22,6 +23,7 @@ public class playerController : MonoBehaviour
 
     public Animator animator;
     public Animator effectsAnimator;
+    public Animator spaceShipAnimator;
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +70,12 @@ public class playerController : MonoBehaviour
         {
             if (carriesBattery)
             {
+                //spaceShipAnimator.SetTrigger("despegar");
+                //if (Input.GetKeyDown("Space"))
+                //{
+                //}
                 SceneManager.LoadScene("FinalScene");
+
             }
         }
     }
@@ -101,7 +108,7 @@ public class playerController : MonoBehaviour
 
 
                 }
-                Destroy(col.gameObject);
+                col.gameObject.SetActive(false);
                 break;
 
             //Speed
@@ -172,6 +179,22 @@ public class playerController : MonoBehaviour
                 {
                     Debug.Log("I have the battery!");
                 }
+                break;
+
+            //Just Die
+            case 6:
+                gameObject.GetComponent<gameManager>().killPlayer();
+                break;
+
+            //Monster, die if touch but could be killed
+            case 7:
+                gameObject.GetComponent<gameManager>().killPlayer();
+                break;
+
+            //Pala
+            case 8:
+                Destroy(col.gameObject);
+                doorCollider.SetActive(false);
                 break;
         }
     }
