@@ -67,7 +67,7 @@ public class playerController : MonoBehaviour
         {
             if (carriesBattery)
             {
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("FinalScene");
             }
         }
     }
